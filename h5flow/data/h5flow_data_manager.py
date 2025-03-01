@@ -49,11 +49,11 @@ class H5FlowDataManager(object):
         if drop_list:
             self.drop_list = drop_list
             uid = uuid.uuid4()
-            if self.mpi_flag:
-                uid = self.comm.bcast(uid, root=0)
 
             self._temp_filepath = os.path.join(os.path.dirname(self.filepath),
                                                time.strftime(self._temp_filename_fmt).format(uid=uid))
+            if self.mpi_flag:
+                self._temp_filepath = self.comm.bcast(self._temp_filepath, root=0)
             logging.info(f'writing temporary data to {self._temp_filepath}')
         else:
             self.drop_list = list()
