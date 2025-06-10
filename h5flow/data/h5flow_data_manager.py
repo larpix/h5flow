@@ -85,7 +85,7 @@ class H5FlowDataManager(object):
             if isinstance(args[-1], slice):
                 sel = args[-1]
                 args = args[:-1]
-            elif isinstance(args[-1], int):
+            elif isinstance(args[-1], (int, np.integer)):
                 sel = slice(args[-1], args[-1] + 1)
                 args = args[:-1]
             elif isinstance(args[-1], (str,bytes)):
@@ -469,7 +469,7 @@ class H5FlowDataManager(object):
         dset = self.get_dset(dataset_name)
         curr_len = len(dset)
         specs = self.comm.allgather(spec) if self.mpi_flag else [spec]
-        if isinstance(spec, int):
+        if isinstance(spec, (int, np.integer)):
             # create a new chunk at the end of the dataset
             n = sum(specs)
             self._resize_dset(dset, (curr_len + n,))
