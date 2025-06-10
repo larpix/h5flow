@@ -83,7 +83,6 @@ def run(configs, output_filename, input_filename=None, start_position=None, end_
             input_filename = output_filename
 
         # refresh resource list
-        global resources
         for key in list(resources.keys()):
             del resources[key]
 

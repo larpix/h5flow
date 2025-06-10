@@ -71,8 +71,6 @@ class H5FlowManager(object):
             :param end_position: ``int``, dataset end index passed to generator
 
         '''
-        global resources
-
         for obj_config in config.get('resources', list()):
             obj_classname = obj_config['classname']
             obj_path = obj_config.get('path', None)
@@ -210,7 +208,6 @@ class H5FlowManager(object):
             sequence and in that order.
 
         '''
-        global resources
         for classname, resource in resources.items():
             resource.init(self.generator.dset_name)
 
@@ -259,7 +256,6 @@ class H5FlowManager(object):
         for stage in self.stages:
             stage.finish(self.generator.dset_name)
 
-        global resources
         for classname, resource in resources.items():
             resource.finish(self.generator.dset_name)
 
