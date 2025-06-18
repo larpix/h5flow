@@ -88,7 +88,7 @@ def dereference_chain(sel, refs, data=None, regions=None, mask=None, ref_directi
         :param indices_only: flag to skip loading the data and instead just return indices into the final dataset
 
     '''
-    sel = np.r_[sel]
+    sel = np.r_[sel].astype(np.uint)
     mask = np.zeros_like(sel, dtype=bool) | (mask if mask is not None else False)
     sel = ma.array(sel, mask=mask, shrink=False)
     shape = (len(sel),)
